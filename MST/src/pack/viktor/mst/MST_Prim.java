@@ -1,6 +1,7 @@
 package pack.viktor.mst;
 
-import pack.viktor.pq.MinIdxPriorityQueue_BinHeap;
+import pack.viktor.pq.MinIdxPriorityQueue;
+import pack.viktor.pq.MinIdxPriorityQueue_BH;
 
 /** 
 * Klasa koja implementira interfejs MST Primovim algoritmom
@@ -9,8 +10,8 @@ import pack.viktor.pq.MinIdxPriorityQueue_BinHeap;
 public class MST_Prim implements MST {
 	
 	private Graph R;
-	private Graph G;
-	private MinIdxPriorityQueue_BinHeap<Edge> Q;
+	private final Graph G;
+	private MinIdxPriorityQueue<Edge> Q;
 	boolean used[];
 	
 	private int start;
@@ -50,10 +51,10 @@ public class MST_Prim implements MST {
 	@Override
 	public Graph generate() {
 		
-		R = new Graph(G.V());		
-		used = new boolean[G.V()];
-		for (int i=0; i<used.length; i++) used[i]=false;
-	    Q = new MinIdxPriorityQueue_BinHeap<Edge>(G.V(),2*G.V());
+            R = new Graph(G.V());		
+            used = new boolean[G.V()];
+            for (int i=0; i<used.length; i++) used[i]=false;
+	    Q = new MinIdxPriorityQueue_BH<>(G.V(),2*G.V());
 	    
 	    used[start]=true;
 	    collect(start);	    
